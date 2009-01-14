@@ -56,13 +56,23 @@ describe "dm-pagination" do
       101.times{|i| Post.create(:index => i)}
     end
 
-    it "should be spawn" do
+    it "should be tested on 101 posts" do
       Post.count.should == 101
+    end
+
+    it "should have rendered with pagination" do
       response = request "/pagination_builder/simple"
+      response.should be_successful
       response.should have_selector("div.pagination")
       response.should have_selector("ul")
       response.should have_selector("li")
       response.should have_selector("a[rel=next]")
+    end
+
+    it "should have rendered with pagination at page 2" do
+      response = request "/pagination_builder/simple", :params => {:page => 2}
+      response.should be_successful
+      response.should have_selector("a[rel=prev]")
     end
   end
 end

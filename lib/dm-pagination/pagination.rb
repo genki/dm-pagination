@@ -1,8 +1,8 @@
 module DmPagination
   class Pagination
     def initialize(collection, options)
-      @page = options[:page] || 1
-      @per_page = options[:per_page] || 10
+      @page = (options[:page] || 1).to_i
+      @per_page = (options[:per_page] || 10).to_i
       @proxy_collection = collection
       @collection = collection.all(
         :offset => (@page - 1)*@per_page, :limit => @per_page)

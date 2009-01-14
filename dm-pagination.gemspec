@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dm-pagination}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Genki Takiuchi"]
-  s.date = %q{2009-01-14}
+  s.date = %q{2009-01-15}
   s.description = %q{Merb plugin that provides pagination for DataMapper}
   s.email = %q{genki@s21g.com}
   s.extra_rdoc_files = ["README", "LICENSE", "TODO"]
-  s.files = ["LICENSE", "README", "Rakefile", "TODO", "lib/dm-pagination", "lib/dm-pagination/merbtasks.rb", "lib/dm-pagination.rb", "spec/dm-pagination_spec.rb", "spec/spec_helper.rb"]
+  s.files = ["LICENSE", "README", "Rakefile", "TODO", "lib/dm-pagination", "lib/dm-pagination/merbtasks.rb", "lib/dm-pagination/paginatable.rb", "lib/dm-pagination/pagination.rb", "lib/dm-pagination/pagination_builder.rb", "lib/dm-pagination.rb", "spec/dm-pagination_spec.rb", "spec/fixture", "spec/fixture/app", "spec/fixture/app/controllers", "spec/fixture/app/controllers/pagination_builder.rb", "spec/fixture/app/models", "spec/fixture/app/models/post.rb", "spec/fixture/app/views", "spec/fixture/app/views/layout", "spec/fixture/app/views/layout/application.html.erb", "spec/fixture/app/views/pagination_builder", "spec/fixture/app/views/pagination_builder/simple.html.erb", "spec/fixture/config", "spec/fixture/config/router.rb", "spec/merb_test.log", "spec/spec_helper.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://blog.s21g.com/genki}
   s.require_paths = ["lib"]
