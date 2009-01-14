@@ -1,7 +1,7 @@
 dm-pagination
 =============
 
-A plugin for the Merb framework that provides ...
+A plugin for the Merb framework that provides pagination for DataMapper.
 
 USAGE:
 
