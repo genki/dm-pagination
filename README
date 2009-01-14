@@ -2,3 +2,22 @@ dm-pagination
 =============
 
 A plugin for the Merb framework that provides ...
+
+USAGE:
+
+  In your controller,
+
+  class Posts
+    def index
+      @posts = Post.paginate(:page => params[:page])
+    end
+
+  In your view,
+
+  <ul>
+  <% @posts.each do |post| %>
+    <li><%= h(post.body) %></li>
+  <% end %>
+  </ul>
+  <%= paginate @posts %>
+
