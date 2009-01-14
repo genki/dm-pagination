@@ -1,9 +1,11 @@
 module DmPagination
   class Pagination
     def initialize(collection, options)
-      @collection = collection
       @page = options[:page] || 1
       @per_page = options[:per_page] || 10
+      @proxy_collection = collection
+      @collection = collection.all(
+        :offset => (@page - 1)*@per_page, :limit => @per_page)
     end
 
     def page
@@ -11,7 +13,7 @@ module DmPagination
     end
 
     def num_pages
-      (@collection.count + @per_page - 1) / @per_page
+      (@proxy_collection.count + @per_page - 1) / @per_page
     end
 
     def pages(window = 5, left = 2, right = 2)
@@ -20,6 +22,16 @@ module DmPagination
         i <= left || (num_pages - i) < right || (i-page).abs < window ?
           result << i : (result.last.nil? ? result : result << nil)
       end
+    end
+
+    def count
+      offset = (@page - 1)*@per_page
+      [0, [@proxy_collection.count - offset, @per_page].min].max
+    end
+
+    def method_missing(method, *args, &block)
+      puts [@collection.count, @collection.class].inspect
+      @collection.send(method, *args, &block)
     end
   end
 end

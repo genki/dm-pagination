@@ -40,21 +40,29 @@ describe "dm-pagination" do
   describe "pagination" do
     before :all do
       TestPost.all.destroy!
-      100.times{|i| TestPost.create(:index => i)}
+      101.times{|i| TestPost.create(:index => i)}
     end
 
-    it "should be specified on 100 test posts" do
-      TestPost.count.should == 100
+    it "should be specified on 101 test posts" do
+      TestPost.count.should == 101
     end
 
     it "should have 10 pages" do
-      TestPost.paginate.num_pages.should == 10
-      TestPost.all.paginate.num_pages.should == 10
+      TestPost.paginate.num_pages.should == 11
+      TestPost.all.paginate.num_pages.should == 11
     end
 
     it "should be able to calculate num pages on scope" do
-      TestPost.all(:index.gt => 50).count.should == 49
+      TestPost.all(:index.gt => 50).count.should == 50
       TestPost.all(:index.gt => 50).paginate.num_pages.should == 5
+      TestPost.all(:index.gt => 49).paginate.num_pages.should == 6
+    end
+
+    it "should act as Collection" do
+      TestPost.paginate(:page => 8).count.should == 10
+      TestPost.paginate(:page => 11).count.should == 1
+      TestPost.paginate(:page => 12).count.should == 0
+      TestPost.paginate(:page => 5, :per_page => 6).count.should == 6
     end
   end
 end
