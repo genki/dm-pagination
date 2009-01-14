@@ -1,1 +1,7 @@
+<ul>
+  <% @posts.each do |post| %>
+    <li><%= post.index %></li>
+  <% end %>
+</ul>
+
 <%= paginate @posts %>

@@ -20,9 +20,23 @@ module DmPagination
     end
 
     def link_to_prev
+      if @pagination.page > 1
+        @context.link_to prev_label,
+          url(:page => @pagination.page - 1),
+          :class => :prev, :rel => "prev"
+      else
+        span.call(prev_label)
+      end
     end
 
     def link_to_next
+      if @pagination.page < @pagination.num_pages
+        @context.link_to next_label,
+          url(:page => @pagination.page + 1),
+          :class => :older, :rel => "next"
+      else
+        span.call(next_label)
+      end
     end
 
     def link_to_page(page)
@@ -46,12 +60,24 @@ module DmPagination
       if @block
         @block.call(page, *args)
       else
-        @context.link_to(page, @context.url(:page => page))
+        @context.link_to(page, url(:page => page))
       end
     end
 
     def truncate
       @options[:truncate] || '...'
+    end
+
+    def prev_label
+      @options[:prev] || '&laquo; Prev'
+    end
+
+    def next_label
+      @options[:next] || 'Next &raquo;'
+    end
+
+    def url(params)
+      @context.url(@context.params.merge(params))
     end
   end
 end

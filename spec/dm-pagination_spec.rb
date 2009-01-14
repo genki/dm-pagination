@@ -57,8 +57,12 @@ describe "dm-pagination" do
     end
 
     it "should be spawn" do
+      Post.count.should == 101
       response = request "/pagination_builder/simple"
       response.should have_selector("div.pagination")
+      response.should have_selector("ul")
+      response.should have_selector("li")
+      response.should have_selector("a[rel=next]")
     end
   end
 end

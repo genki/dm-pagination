@@ -1,13 +1,11 @@
 module DmPagination
-  class Pagination < DataMapper::Collection
+  class Pagination
     def initialize(collection, options)
       @page = options[:page] || 1
       @per_page = options[:per_page] || 10
       @proxy_collection = collection
-      query = collection.send :scoped_query,
-        :offset => (@page - 1)*@per_page,
-        :limit => @per_page
-      super(query){|set| repository.read(query, set, true)}
+      @collection = collection.all(
+        :offset => (@page - 1)*@per_page, :limit => @per_page)
     end
 
     def page
@@ -29,6 +27,10 @@ module DmPagination
     def count
       offset = (@page - 1)*@per_page
       [0, [@proxy_collection.count - offset, @per_page].min].max
+    end
+
+    def method_missing(method, *args, &block)
+      @collection.send(method, *args, &block)
     end
   end
 end
