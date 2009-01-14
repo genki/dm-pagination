@@ -65,15 +65,15 @@ module DmPagination
     end
 
     def truncate
-      @options[:truncate] || '...'
+      @options[:truncate] || Merb::Plugins.config[:dm_pagination][:truncate]
     end
 
     def prev_label
-      @options[:prev] || '&laquo; Prev'
+      @options[:prev] || Merb::Plugins.config[:dm_pagination][:prev_label]
     end
 
     def next_label
-      @options[:next] || 'Next &raquo;'
+      @options[:next] || Merb::Plugins.config[:dm_pagination][:next_label]
     end
 
     def url(params)

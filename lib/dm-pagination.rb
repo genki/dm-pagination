@@ -3,7 +3,9 @@ if defined?(Merb::Plugins)
 
   # Merb gives you a Merb::Plugins.config hash...feel free to put your stuff in your piece of it
   Merb::Plugins.config[:dm_pagination] = {
-    :chickens => false
+    :prev_label => '&laquo; Prev',
+    :next_label => 'Next &raquo;',
+    :truncate => '...'
   }
   
   Merb::BootLoader.before_app_loads do
