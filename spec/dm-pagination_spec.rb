@@ -73,6 +73,13 @@ describe "dm-pagination" do
       response = request "/pagination_builder/simple", :params => {:page => 2}
       response.should be_successful
       response.should have_selector("a[rel=prev]")
+      response.body.scan(/Prev|Next/).should == %w(Prev Next)
+    end
+
+    it "should be able to control links" do
+      response = request "/pagination_builder/variant"
+      response.should be_successful
+      response.body.scan(/Prev|Next/).should == %w(Next Prev)
     end
   end
 end

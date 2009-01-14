@@ -5,7 +5,7 @@ module DmPagination
       @pagination = pagination
       @block = block
       @options = args.last.kind_of?(Hash) ? args.pop : {}
-      @args = args.blank? ? [:prev, :pages, :next] : []
+      @args = args.blank? ? [:prev, :pages, :next] : args
     end
 
     def to_s(*args)
