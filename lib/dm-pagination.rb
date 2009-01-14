@@ -20,6 +20,15 @@ if defined?(Merb::Plugins)
         extend DmPagination::Paginatable
       end
     end
+
+    require 'dm-pagination/pagination_builder'
+    module Merb
+      module GlobalHelpers
+        def paginate(pagination, *args, &block)
+          DmPagination::PaginationBuilder.new(self, pagination, *args, &block)
+        end
+      end
+    end
   end
   
   Merb::BootLoader.after_app_loads do
