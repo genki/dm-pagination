@@ -25,7 +25,7 @@ module DmPagination
           url(:page => @pagination.page - 1),
           :class => :prev, :rel => "prev"
       else
-        span.call(prev_label)
+        span.call(prev_label, :prev)
       end
     end
 
@@ -33,9 +33,9 @@ module DmPagination
       if @pagination.page < @pagination.num_pages
         @context.link_to next_label,
           url(:page => @pagination.page + 1),
-          :class => :older, :rel => "next"
+          :class => :next, :rel => "next"
       else
-        span.call(next_label)
+        span.call(next_label, :next)
       end
     end
 

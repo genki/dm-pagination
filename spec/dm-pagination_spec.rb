@@ -72,7 +72,8 @@ describe "dm-pagination" do
     it "should have rendered with pagination at page 2" do
       response = request "/pagination_builder/simple", :params => {:page => 2}
       response.should be_successful
-      response.should have_selector("a[rel=prev]")
+      response.should have_selector("a.prev[rel=prev]")
+      response.should have_selector("a.next[rel=next]")
       response.body.scan(/Prev|Next/).should == %w(Prev Next)
     end
 
@@ -80,6 +81,11 @@ describe "dm-pagination" do
       response = request "/pagination_builder/variant"
       response.should be_successful
       response.body.scan(/Prev|Next/).should == %w(Next Prev)
+      response.should have_selector("a.next[rel=next]")
+      response.should_not have_selector("a.prev[rel=prev]")
+      response.should have_selector("span.prev")
+      response.should have_selector("span.number")
+      response.should_not have_selector("span.prev.number")
     end
   end
 end
