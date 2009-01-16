@@ -52,7 +52,8 @@ module DmPagination
   private
     def span
       proc do |*args|
-        @context.tag(:span, args[0].to_s, :class => (args[1]||"disabled"))
+        @context.tag(:span, args[0].to_s,
+          :class => [args[1], "disabled"].compact.join(' '))
       end
     end
 
