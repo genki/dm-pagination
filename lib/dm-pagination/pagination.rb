@@ -29,6 +29,10 @@ module DmPagination
       [0, [@proxy_collection.count - offset, @per_page].min].max
     end
 
+    def respond_to?(*args, &block)
+      super || @collection.send(:respond_to?, *args, &block)
+    end
+
     def method_missing(method, *args, &block)
       @collection.send(method, *args, &block)
     end

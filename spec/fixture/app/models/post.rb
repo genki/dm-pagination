@@ -3,4 +3,8 @@ class Post
 
   property :id, Serial
   property :index, Integer
+
+  def self.to_atom
+    "atom"
+  end
 end

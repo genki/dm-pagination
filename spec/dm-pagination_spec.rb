@@ -17,6 +17,10 @@ describe "dm-pagination" do
       Post.paginate.should be_kind_of(DmPagination::Pagination)
       Post.all.paginate.should be_kind_of(DmPagination::Pagination)
     end
+
+    it "should respond to model's method" do
+      Post.paginate.should be_respond_to(:to_atom)
+    end
   end
 
   describe "pagination" do
