@@ -92,6 +92,8 @@ describe "dm-pagination" do
       response.should have_selector("span.prev")
       response.should have_selector("span.number")
       response.should_not have_selector("span.prev.number")
+      url = "/pagination_builder/variant?foo=2"
+      response.should have_xpath("//a[@href='#{url}']")
     end
   end
 end
