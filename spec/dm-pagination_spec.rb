@@ -79,6 +79,8 @@ describe "dm-pagination" do
       response.should have_selector("a.prev[rel=prev]")
       response.should have_selector("a.next[rel=next]")
       response.body.scan(/Prev|Next/).should == %w(Prev Next)
+      url = "/pagination_builder/simple?page=3"
+      response.should have_xpath("//a[@href='#{url}']")
     end
 
     it "should be able to control links" do

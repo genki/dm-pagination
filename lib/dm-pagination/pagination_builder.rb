@@ -5,6 +5,7 @@ module DmPagination
       @pagination = pagination
       @block = block
       @options = args.last.kind_of?(Hash) ? args.pop : {}
+      @options[:page] ||= :page
       @args = args.blank? ? [:prev, :pages, :next] : args
     end
 
@@ -22,7 +23,7 @@ module DmPagination
     def link_to_prev
       if @pagination.page > 1
         @context.link_to prev_label,
-          url(:page => @pagination.page - 1),
+          url(@options[:page] => @pagination.page - 1),
           :class => :prev, :rel => "prev"
       else
         span.call(prev_label, :prev)
@@ -32,7 +33,7 @@ module DmPagination
     def link_to_next
       if @pagination.page < @pagination.num_pages
         @context.link_to next_label,
-          url(:page => @pagination.page + 1),
+          url(@options[:page] => @pagination.page + 1),
           :class => :next, :rel => "next"
       else
         span.call(next_label, :next)
@@ -61,7 +62,7 @@ module DmPagination
       if @block
         @block.call(page, *args)
       else
-        @context.link_to(page, url(:page => page))
+        @context.link_to(page, url(@options[:page] => page))
       end
     end
 
