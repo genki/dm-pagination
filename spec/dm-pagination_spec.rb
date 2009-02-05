@@ -95,5 +95,65 @@ describe "dm-pagination" do
       url = "/pagination_builder/variant?foo=2"
       response.should have_xpath("//a[@href='#{url}']")
     end
+
+    it "should have rendered with pagination(1, 3, 4, 5, 6, 7, 8, 9, 10) at page 2" do
+      response = request "/pagination_builder/simple", :params => {:page => 2}
+      (1..10).reject{|p| p == 2}.each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should have_xpath("//a[@href='#{url}']")
+      end
+      [2, 11].each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should_not have_xpath("//a[@href='#{url}']")
+      end
+    end
+
+    it "should have rendered with pagination(1, 2, 3, 4, 6, 7, 8, 9, 10) at page 5" do
+      response = request "/pagination_builder/simple", :params => {:page => 5}
+      (1..10).reject{|p| p == 5}.each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should have_xpath("//a[@href='#{url}']")
+      end
+      [5, 11].each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should_not have_xpath("//a[@href='#{url}']")
+      end
+    end
+
+    it "should have rendered with pagination(2, 3, 4, 5, 6, 8, 9, 10, 11) at page 7" do
+      response = request "/pagination_builder/simple", :params => {:page => 7}
+      (2..11).reject{|p| p == 7}.each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should have_xpath("//a[@href='#{url}']")
+      end
+      [1, 7].each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should_not have_xpath("//a[@href='#{url}']")
+      end
+    end
+
+    it "should have rendered with pagination(2, 3, 4, 5, 6, 7, 8, 9, 11) at page 10" do
+      response = request "/pagination_builder/simple", :params => {:page => 10}
+      (2..11).reject{|p| p == 10}.each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should have_xpath("//a[@href='#{url}']")
+      end
+      [1, 10].each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should_not have_xpath("//a[@href='#{url}']")
+      end
+    end
+
+    it "should have rendered with pagination(2, 3, 4, 5, 6, 7, 8, 9, 10) at page 11" do
+      response = request "/pagination_builder/simple", :params => {:page => 11}
+      (2..10).each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should have_xpath("//a[@href='#{url}']")
+      end
+      [1, 11].each do |page|
+        url = "/pagination_builder/simple?page=#{page}"
+        response.should_not have_xpath("//a[@href='#{url}']")
+      end
+    end
   end
 end
