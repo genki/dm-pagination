@@ -26,7 +26,6 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('merb', '>= 1.0.7.1')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec}/**/*")
-  
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
