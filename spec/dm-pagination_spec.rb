@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/spec_helper'
-
 DataMapper.setup(:default, "sqlite3::memory:")
 
 Post.auto_migrate!
@@ -154,6 +153,12 @@ describe "dm-pagination" do
         url = "/pagination_builder/simple?page=#{page}"
         response.should_not have_xpath("//a[@href='#{url}']")
       end
+    end
+
+    it "should have rendered with pagination 'pagination_builder?page=2'" do
+      response = request "/pagination_builder"
+      url = "/pagination_builder?page=2"
+      response.should have_xpath("//a[@href='#{url}']")
     end
   end
 end

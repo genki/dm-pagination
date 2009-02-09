@@ -79,6 +79,7 @@ module DmPagination
     end
 
     def url(params)
+      @context.params.delete(:action) if @context.params[:action] == 'index'
       @context.url(@context.params.merge(params))
     end
   end
