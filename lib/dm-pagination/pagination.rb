@@ -6,6 +6,7 @@ module DmPagination
       @proxy_collection = collection
       @collection = collection.all(
         :offset => (@page - 1)*@per_page, :limit => @per_page)
+      @num_pages = num_pages
     end
 
     def page
@@ -17,9 +18,9 @@ module DmPagination
     end
 
     def pages(window = 5, left = 2, right = 2)
-      return [] if num_pages <= 1
-      (1..num_pages).inject([]) do |result, i|
-        i <= left || (num_pages - i) < right || (i-page).abs < window ?
+      return [] if @num_pages <= 1
+      (1..@num_pages).inject([]) do |result, i|
+        i <= left || (@num_pages - i) < right || (i-page).abs < window ?
           result << i : (result.last.nil? ? result : result << nil)
       end
     end
