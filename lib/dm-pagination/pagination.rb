@@ -3,19 +3,26 @@ module DmPagination
     def initialize(collection, options)
       @page = (options[:page] || 1).to_i
       @per_page = (options[:per_page] || 10).to_i
+      @reverse = true if options[:reverse]
       @proxy_collection = collection
+      @offset = offset
+      @num_pages = (@proxy_collection.count + @per_page - 1) / @per_page
       @collection = collection.all(
-        :offset => (@page - 1)*@per_page, :limit => @per_page)
-      @num_pages = num_pages
+        :offset => @offset , :limit => @per_page)
     end
 
     def page
       @page
     end
 
-    def num_pages
-      (@proxy_collection.count + @per_page - 1) / @per_page
+    def offset
+      if @reverse
+        (@page - @numpages)*@per_page
+      else
+        (@page - 1)*@per_page
+      end
     end
+
 
     def pages(window = 5, left = 2, right = 2)
       return [] if @num_pages <= 1
