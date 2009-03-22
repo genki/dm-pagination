@@ -50,6 +50,10 @@ describe "dm-pagination" do
       Post.paginate(:page => 12).count.should == 0
       Post.paginate(:page => 5, :per_page => 6).count.should == 6
     end
+
+    it "should handle :order parametetr" do
+      Post.paginate(:page => 1, :order => [:id.desc]).first.id.should == 101
+    end
   end
 
   describe "pagination builder" do
