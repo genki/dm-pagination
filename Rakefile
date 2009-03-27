@@ -30,6 +30,7 @@ spec = Gem::Specification.new do |s|
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
+	pkg.need_tar = true
   pkg.gem_spec = spec
 end
 
