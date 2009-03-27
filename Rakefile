@@ -10,9 +10,10 @@ AUTHOR = "Genki Takiuchi"
 EMAIL = "genki@s21g.com"
 HOMEPAGE = "http://blog.s21g.com/genki"
 SUMMARY = "Merb plugin that provides pagination for DataMapper"
+RUBYFORGE_PROJECT = "asakusarb"
 
 spec = Gem::Specification.new do |s|
-  s.rubyforge_project = 'merb'
+  s.rubyforge_project = RUBYFORGE_PROJECT
   s.name = GEM_NAME
   s.version = GEM_VERSION
   s.platform = Gem::Platform::RUBY
@@ -26,7 +27,6 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('merb', '>= 1.0.7.1')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec}/**/*")
-  
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
@@ -53,6 +53,32 @@ end
 desc "Run spec"
 task :spec do
   sh "spec spec --color"
+end
+
+desc 'Package and upload the release to rubyforge.'
+task :release => :package do |t|
+  require 'rubyforge'
+	v = ENV["VERSION"] or abort "Must supply VERSION=x.y.z"
+	abort "Versions don't match #{v} vs #{GEM_VERSION}" unless v == GEM_VERSION
+	pkg = "pkg/#{GEM_NAME}-#{GEM_VERSION}"
+
+	require 'rubyforge'
+	rf = RubyForge.new.configure
+	puts "Logging in"
+	rf.login
+
+	c = rf.userconfig
+#	c["release_notes"] = description if description
+#	c["release_changes"] = changes if changes
+	c["preformatted"] = true
+
+	files = [
+		"#{pkg}.tgz",
+		"#{pkg}.gem"
+	].compact
+
+	puts "Releasing #{GEM_NAME} v. #{GEM_VERSION}"
+	rf.add_release RUBYFORGE_PROJECT, GEM_NAME, GEM_VERSION, *files
 end
 
 task :default => :spec

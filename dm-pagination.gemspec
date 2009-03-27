@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Genki Takiuchi"]
-  s.date = %q{2009-03-21}
+  s.date = %q{2009-03-27}
   s.description = %q{Merb plugin that provides pagination for DataMapper}
   s.email = %q{genki@s21g.com}
   s.extra_rdoc_files = ["README", "LICENSE", "TODO"]
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.homepage = %q{http://blog.s21g.com/genki}
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{merb}
+  s.rubyforge_project = %q{asakusarb}
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{Merb plugin that provides pagination for DataMapper}
 
