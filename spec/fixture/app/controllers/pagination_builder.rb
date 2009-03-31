@@ -8,4 +8,9 @@ class PaginationBuilder < Merb::Controller
     @posts = Post.paginate(params)
     render
   end
+
+  def index
+    @posts = Post.paginate(params)
+    render
+  end
 end
