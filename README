@@ -21,3 +21,10 @@ USAGE:
   </ul>
   <%= paginate @posts %>
 
+Paramaters:
+:order = same paramaters as the :order in a normal DM call
+  (http://datamapper.org/doku.php?id=docs:finders&s[]=order#order)
+
+:per_page = Number of items per page
+
+:page = What page number

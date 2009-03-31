@@ -5,7 +5,8 @@ if defined?(Merb::Plugins)
   Merb::Plugins.config[:dm_pagination] = {
     :prev_label => '&laquo; Prev',
     :next_label => 'Next &raquo;',
-    :truncate => '...'
+    :truncate => '...',
+    :paginator => :trio,
   }
   
   Merb::BootLoader.before_app_loads do
