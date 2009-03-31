@@ -27,6 +27,10 @@ module DmPagination
       def method_missing(method, *args, &block)
         @collection.send(method, *args, &block)
       end
+    
+      def to_json
+        @collection.to_json
+      end
     end
   end
 end

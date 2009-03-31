@@ -175,4 +175,12 @@ describe "dm-pagination" do
       response.should have_xpath("//a[@href='#{url}']")
     end
   end
+
+  describe "#to_json" do
+    it "returns the json of the collection" do
+      pagination = Post.paginate(:page => 1)
+
+      pagination.to_json.should == pagination.instance_variable_get(:@collection).to_json
+    end
+  end
 end
