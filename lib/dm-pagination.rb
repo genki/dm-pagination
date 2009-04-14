@@ -20,7 +20,7 @@ if defined?(Merb::Plugins)
       end
 
       class Collection
-        extend DmPagination::Paginatable
+        include DmPagination::Paginatable
       end
     end
 
