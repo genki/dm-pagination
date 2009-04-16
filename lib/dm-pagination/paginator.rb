@@ -31,6 +31,15 @@ module DmPagination
       def to_json
         @collection.to_json
       end
+
+      def to_a
+        # workaround for bug of LazyArray
+        @collection.map
+      end
+
+      def each(&block)
+        to_a.each(&block)
+      end
     end
   end
 end
