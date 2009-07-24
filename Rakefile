@@ -1,15 +1,12 @@
 require 'rubygems'
 require 'rake/gempackagetask'
 
-require 'merb-core'
-require 'merb-core/tasks/merb'
-
 GEM_NAME = "dm-pagination"
-GEM_VERSION = "0.3.6"
+GEM_VERSION = "0.4.0"
 AUTHOR = "Genki Takiuchi"
 EMAIL = "genki@s21g.com"
 HOMEPAGE = "http://blog.s21g.com/genki"
-SUMMARY = "Merb plugin that provides pagination for DataMapper"
+SUMMARY = "DataMapper plugin that provides pagination"
 RUBYFORGE_PROJECT = "asakusarb"
 
 spec = Gem::Specification.new do |s|
@@ -24,7 +21,8 @@ spec = Gem::Specification.new do |s|
   s.author = AUTHOR
   s.email = EMAIL
   s.homepage = HOMEPAGE
-  s.add_dependency('merb-core', '>= 1.0.7.1')
+  s.add_dependency('dm-core', '>= 0.9.11')
+  s.add_dependency('agnostic', '>= 0.1.0')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec}/**/*")
 end
@@ -32,16 +30,6 @@ end
 Rake::GemPackageTask.new(spec) do |pkg|
 	pkg.need_tar = true
   pkg.gem_spec = spec
-end
-
-desc "install the plugin as a gem"
-task :install do
-  Merb::RakeHelper.install(GEM_NAME, :version => GEM_VERSION)
-end
-
-desc "Uninstall the gem"
-task :uninstall do
-  Merb::RakeHelper.uninstall(GEM_NAME, :version => GEM_VERSION)
 end
 
 desc "Create a gemspec file"

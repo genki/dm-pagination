@@ -67,15 +67,15 @@ module DmPagination
     end
 
     def truncate
-      @options[:truncate] || Merb::Plugins.config[:dm_pagination][:truncate]
+      @options[:truncate] || Agnostic.plugin(:dm_pagination).truncate
     end
 
     def prev_label
-      @options[:prev] || Merb::Plugins.config[:dm_pagination][:prev_label]
+      @options[:prev] || Agnostic.plugin(:dm_pagination).prev_label
     end
 
     def next_label
-      @options[:next] || Merb::Plugins.config[:dm_pagination][:next_label]
+      @options[:next] || Agnostic.plugin(:dm_pagination).next_label
     end
 
     def url(params)
